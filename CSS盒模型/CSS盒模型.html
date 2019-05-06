@@ -1,0 +1,57 @@
+CSS盒模型
+content + padding + border + margin
+内容 + 内边距 + 边框 + 外边距
+
+基本概念：标准模型 + IE模型
+标准模型和IE模型的区别
+标准模型和IE模型计算宽高的方式不同
+标准模型：content
+IE模型：content + padding + border
+
+CSS如何设置这两种模型
+box-sizing: content-box; // 默认 标准模型
+box-sizing: border-box; // IE模型
+
+JS如何设置获取盒模型对应的宽和高
+1. dom.style.width/height （只能获取内联样式的宽和高）
+2. dom.currentStyle.width/height （仅IE支持，三种方式的样式都可获取）
+3. window.getComputedStyle(dom).width/height （兼容Firefox和Chrom，通用性更好）
+4. dom.getBoundingClientRect().width/height （可获取即时运行完后元素的宽和高，经常用来计算一个元素的绝对位置，绝对位置依据视窗(viewport)）
+
+实例题（根据盒模型解释边距重叠）
+
+BFC（边距重叠解决方案）/IFC （CSS2.1）
+BFC：基本概念——Block Formatting Contexts 块级格式化上下文
+原理：BFC的渲染规则
+1. BFC元素垂直方向的边距会发生重叠
+2. BFC的区域不会与浮动元素的box重叠
+3. BFC在浏览器页面里是一个独立的容器，内外元素互不影响（页面上一个隔离的渲染区域）
+4. 计算BFC高度的时候，浮动元素也会参与计算
+如何创建BFC：
+1. float的值不为none
+2. position的值不为static或者relative
+3. display的值为table-cell, table-caption, inline-block中的任何一个
+4. overflow的值不为visible
+
+IFC: Inline Formatting Contexts 内联格式化上下文
+IFC的line box（线框）高度由其包含行内元素中最高的实际高度计算而来（不受到竖直方向的padding/margin影响）
+特性：
+1. IFC中的line box一般左右都紧贴整个IFC，但是会因为float元素而扰乱。float元素会位于IFC与line box之间，使得line box宽度缩短
+2. IFC中不可能有块级元素的，当插入块级元素时（如p中插入div）会产生两个匿名块与div分隔开，即产生两个IFC，每个IFC对外表现为块级元素，与div垂直排列
+作用：
+水平居中：当一个块要在环境中水平居中时，设置其为inline-block则会在外层产生IFC，通过text-align则可以使其水平居中。
+垂直居中：创建一个IFC，用其中一个元素撑开父元素的高度，然后设置其vertical-align: middle，其他行内元素则可以在此父元素下垂直居中
+
+GFC/FFC （CSS3）
+GFC：GridLayout Formatting Contexts 网格布局格式化上下文
+当为一个元素设置display值为grid的时候，此元素将会获得一个独立的渲染区域，我们可以通过在网格容器(grid container)上定义网格定义行(grid definition rows)和网格定义列(grid definition columns)属性，各在网格项目(grid item)上定义网格行(grid row)和网格列(grid columns)为每一个网格项目定义位置和空间
+GFC将改变传统的布局模式，它将让布局从一维布局变成了二维布局。简单地说，有了GFC之后，布局不再局限于单个维度了。这个时候实现类似九宫格、拼图之类的布局效果显得格外的容易
+
+FFC：Flex Formatting Contexts 自适应格式化上下文
+display值为flex或者inline-flex的元素将会生成自适应容器（flex container），设置为flex的容器被渲染为一个块级元素，而设置为inline-flex的容器则渲染为一个行内元素
+Flex Box由伸缩容器和伸缩项目组成。
+Flex Box不支持::first-line和::first-letter这两种伪元素
+vertical-align对Flexbox中的子元素是没有效果的
+float和clear属性对Flexbox中的子元素是没有效果的，也不会使子元素脱离文档流（但是对Flexbox是有效果的）
+多栏布局（column-*）在Flexbox中也是失效的，就是说我们不能使用多栏布局在Flexbox中排列其下的子元素
+Flexbox下的子元素不会继承父级容器的宽

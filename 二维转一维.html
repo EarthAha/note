@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  // 转化成字符串：
+  // "{"2017-02-28": [{"name": "lucy"}, {"name": "lilei"}], "2017-05-14": [{"name": "jack"}], ...}"
+  var data = [[{"name": "lucy", "date": "2017-02-28"}], [{"name": "lilei", "date": "2017-02-28"}], [{"name": "jack", "date": "2017-05-14"}]];
+  var res = {};
+  // var change = data.reduce((res, val) => res.concat(val));
+  var change = [].concat.apply([], data);
+  // for (let i = 0, len = change.length; i < len; i++) {
+  //   if (!res[change[i].date]) {
+  //     res[change[i].date] = [];
+  //     res[change[i].date].push({name: change[i].name});
+  //   }else {
+  //     res[change[i].date].push({name: change[i].name});
+  //   }
+  // }
+  change.forEach((value) => {
+    if (!(res[value.date])) {
+      res[value.date] = [];
+      res[value.date].push(value.name);
+    } else {
+      res[value.date].push(value.name);
+    }
+  })
+  console.log(res);
+
+// var arr1 = [[0, 1], [2, 3], [4, 5]];
+// var arr2 = arr1.reduce(function (a, b) { return a.concat(b)} );
+var arr1 = [[0, 1], [2, 3], [4, 5]];
+var arr2 = [].concat.apply([], arr1);
+// arr2 [0, 1, 2, 3, 4, 5]
+  console.log(arr2);
+</script>
+</body>
+</html>

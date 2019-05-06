@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>浮动布局</title>
+  <style>
+    html * {
+      margin: 0;
+      padding: 0;
+    }
+    section {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <style>
+      .floatFlow {
+        border: 1px dashed blue;
+      }
+      .floatFlow .float {
+        float: left;
+        background: aquamarine;
+        border: 1px dashed red;
+      }
+      .floatFlow .float+div {
+        background: pink;
+        border: 1px dashed black;
+      }
+    </style>
+    <article class="floatFlow">
+        <div class="float">float: left</div>
+        <div>A float is a box that is shifted to the left or right on the current line. The most interesting characteristic of a float ( or "floated" or "floating" box) is that content may flow along its side ( or be prohibited from doing so by the 'clear' property).</div>
+    </article>
+  </section>
+
+  <!-- 增加一个空白元素 -->
+  <section>
+    <style>
+      .addBlank {
+        border: 1px dashed blue;
+      }
+      .addBlank .float {
+        float: left;
+        background: pink;
+        width: 100px;
+        line-height: 100px;
+        text-align: center;
+        border: 1px dashed red;
+      }
+      .addBlank .blank {
+        clear: both;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+      }
+      /* .clearfix:after {
+        content: '.';
+        display: block;
+        clear: both;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+      } */
+    </style>
+    <article class="addBlank clearfix">
+      <div class="float">float: left</div>
+      <div class="float">float: left</div>
+      <div class="float">float: left</div>
+      <br class="blank">
+    </article>
+  </section>
+
+  <!-- 浮动元素的父元素增加clearfix -->
+  <section>
+    <style>
+      .clear .box {
+        border: 1px dashed blue;
+      }
+      .clear .float {
+        float: left;
+        background: pink;
+        width: 100px;
+        line-height: 100px;
+        text-align: center;
+      }
+      .clear .clearfix:after {
+        content: '.';
+        display: block;
+        clear: both;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+      }
+      /* IE低版本兼容 */
+      /* .clear .clearfix {
+        zoom: 1;
+      } */
+    </style>
+    <article class="clear">
+      <div class="box clearfix">
+        <div class="float">float: left</div>
+        第12届ChinaJoy动漫游戏展7月31日在上海新国际博览中心开幕，到处是站台表演的帅哥美女。
+      </div>
+      <div class="box">
+        有些游戏商为了吸引人气，还请来了著名的演员、模特前来助阵。以下是一批漂亮的ShowGirl现场照片。
+      </div>
+    </article>
+  </section>
+
+  <section class="layout">
+    <style>
+      .layout .box {
+        width: 960px;
+        margin: 0 auto;
+        border: 1px dashed blue;
+      }
+      .layout .main {
+        float: left;
+        width: 660px;
+        background: pink;
+      }
+      .layout .side {
+        float: right;
+        width: 300px;
+        background: #eee;
+      }
+      .layout .clearfix:after {
+        content: '.';
+        display: block;
+        height: 0;
+        clear: both;
+        overflow: hidden;
+        visibility: hidden;
+      }
+    </style>
+    <article class="box clearfix">
+      <div class="main">main</div>
+      <div class="side">side</div>
+    </article>
+  </section>
+
+  <!-- <section>
+    <style>
+      .inlineBlock {
+        vertical-align: middle;
+      }
+      .sample {
+        background: pink;
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        vertical-align: middle;
+      }
+    </style>
+    <article class="inlineBlock">
+      <span>before inline-block</span>
+      <span class="sample">display: inline-block;</span>
+      <em>after inline-block</em>
+    </article>
+  </section> -->
+
+  <!-- 居中导航 -->
+  <section class="center">
+    <style>
+      .center ul {
+        text-align: center;
+        height: 30px;
+      }
+      .center ul li {
+        display: inline-block;
+        background: pink;
+        width: 80px;
+        margin: 0 10px;
+        list-style: none;
+      }
+      .center ul li:nth-of-type(2) {
+        background: mediumvioletred;
+      }
+      .center a {
+        text-decoration: none;
+      }
+      a:hover {
+        color: olivedrab;
+      }
+    </style>
+    <article>
+      <ul>
+        <li><a href="#">推荐</a></li>
+        <li><a href="#">歌单</a></li>
+        <li><a href="#">大牌DJ</a></li>
+        <li><a href="#">歌手</a></li>
+        <li><a href="#">新碟上架</a></li>
+      </ul>
+    </article>
+  </section>
+</body>
+</html>

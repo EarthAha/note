@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>弹性布局</title>
+  <style>
+    section {
+      margin-top: 10px;
+    }
+    section article {
+      width: 80%;
+      height: 200px;
+    }
+    section .item {
+      /* width: 500px;
+      height: 60px; */
+      border: 1px solid blue;
+    }
+  </style>
+</head>
+<body>
+  <!-- flex: <'flex-grow'> || <'flex-shrink'> || <'flex-basis'> -->
+  <!-- initial: 0 1 main-size -->
+  <section class="flex">
+    <style>
+      .flex .container {
+        display: flex;
+        background: purple;
+        width: 300px;
+      }
+      .flex .item {
+        width: 100px;
+        background: orangered;
+        margin: 0 10px;
+        flex-shrink: 0;
+      }
+      .flex .item2 {
+        flex-shrink: 1;
+      }
+    </style>
+    <article class="container">
+      <div class="item item1">1</div>
+      <div class="item item2">2</div>
+      <div class="item item3">3</div>
+    </article>
+  </section>
+
+  <!-- flex-direction: row | row-reverse | column | column-reverse -->
+  <section class="direction">
+    <style>
+      .direction .container {
+        display: flex;
+        /* flex-direction: column; */
+        background: purple;
+      }
+      .direction .item {
+        background: orangered;
+      }
+    </style>
+    <article class="container">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </article>
+  </section>
+
+  <!-- flex-wrap: nowrap | wrap | wrap-reverse -->
+  <section class="wrap">
+    <style>
+      .wrap .container {
+        display: flex;
+        flex-wrap: wrap;
+        background: purple;
+      }
+      .wrap .item {
+        background: orangered;
+      }
+    </style>
+    <article class="container">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+      <div class="item">6</div>
+    </article>
+  </section>
+
+  <!-- flex-flow: <'flex-direction'> || <'flex-wrap'> -->
+  <section class="flow">
+    <style>
+      .flow .container {
+        display: flex;
+        flex-flow: row-reverse wrap-reverse;
+        background: purple;
+      }
+      .flow .item {
+        background: orangered;
+      }
+    </style>
+    <article class="container">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+      <div class="item">6</div>
+    </article>
+  </section>
+
+  <!-- order: <integer>  initial:0 -->
+  <section class="order">
+    <style>
+      .order .container {
+        display: flex;
+        background: purple;
+      }
+      .order .item {
+        background: orangered;
+      }
+      .order .sample {
+        order: 1;
+        background: greenyellow;
+      }
+    </style>
+    <article class="container">
+      <div class="item">1 order: 0</div>
+      <div class="item sample">2 order: 1</div>
+      <div class="item">3 order: 0</div>
+    </article>
+  </section>
+
+  <!-- flex-grow: <number>  initial: 0 -->
+  <section class="grow">
+    <style>
+      .grow .container {
+        display: flex;
+        background: purple;
+      }
+      .grow .item {
+        /* width: 100px; */
+        background: orangered;
+      }
+      .grow .item2 {
+        flex-basis: 300px;
+        flex-grow: 1;
+      }
+      .grow .item3 {
+        flex-grow: 2;
+      }
+      .grow .item2, .grow .item3 {
+        flex-basis: 0;
+      }
+    </style>
+    <article class="container">
+      <div class="item item1">1</div>
+      <div class="item item2">2</div>
+      <div class="item item3">3</div>
+    </article>
+  </section>
+
+  <!-- flex-shrink: <number>  initial: 1 -->
+  <section class="shrink">
+    <style>
+      .shrink .container {
+        display: flex;
+        background: purple;
+        width: 300px;
+      }
+      .shrink .item {
+        width: 100px;
+        background: orangered;
+        margin: 0 10px;
+        flex-shrink: 0;
+      }
+      .shrink .item2 {
+        flex-shrink: 1;
+      }
+    </style>
+    <article class="container">
+      <div class="item item1">1</div>
+      <div class="item item2">2</div>
+      <div class="item item3">3</div>
+    </article>
+  </section>
+</body>
+</html>

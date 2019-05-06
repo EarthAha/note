@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    html *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    section {
+      margin-top: 20px;
+    }
+    .layout .parent {
+      width: 300px;
+      height: 200px;
+      background: aqua;
+    }
+    .layout .child {
+      background: aliceblue;
+    }
+  </style>
+</head>
+<body>
+  <!-- inline-block + text-align & table-cell + vertical-align -->
+  <!-- 优：兼容性较好 -->
+  <section class="layout inline-block">
+    <style>
+      .inline-block .parent {
+        text-align: center;
+        display: table-cell; /* 低版本不支持，可把结构换成table */
+        vertical-align: middle;
+      }
+      .inline-block .child {
+        display: inline-block; /* IE6\7不支持，用 display: inline + zoom: 1 */
+      }
+    </style>
+    <article class="center">
+      <div class="parent">
+        <div class="child">center</div>
+      </div>
+    </article>
+  </section>
+
+  <!-- absolute + transform -->
+  <!-- 优: 中间元素为absolute元素，对其他元素无影响 -->
+  <!-- 缺：transform兼容性问题 -->
+  <section class="layout absolute">
+    <style>
+     .absolute .parent {
+       position: relative;
+     }
+     .absolute .child {
+       position: absolute;
+       left: 50%; /* 以中间元素左上角为标点，移动到父元素的一半 */
+       top: 50%;
+       transform: translate(-50%, -50%); /* x轴和y轴分别移动中间元素自身的一半 */
+       -webkit-transform: translate(-50%, -50%);
+       -ms-transform: translate(-50%, -50%);
+     }
+    </style>
+    <article class="center">
+      <div class="parent">
+        <div class="child">center</div>
+      </div>
+    </article>
+  </section>
+
+  <!-- flex -->
+  <!-- 优：节点样式设置简洁 -->
+  <!-- 缺：flex兼容性问题 -->
+  <section class="layout flex">
+    <style>
+      .flex .parent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <article class="center">
+      <div class="parent">
+        <div class="child">center</div>
+      </div>
+    </article>
+  </section>
+
+  <!-- Test -->
+  <!-- Absolute Centering 绝对居中 -->
+  <section class="layout margin">
+    <style>
+      .margin .parent {
+        position: relative;
+      }
+      .margin .child {
+        /* width: 50%; */
+        /* height: 50%; */
+        width: 200px;
+        height: 100px;
+        /* resize: both; */
+        overflow: auto;
+        /* margin: auto; */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -100px;
+        margin-top: -50px;
+        /* top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0; */
+        max-width: 100%;
+        max-height: 100%;
+        /* text-align: right; */
+        /* vertical-align: middle; */
+      }
+    </style>
+    <article class="center">
+      <div class="parent">
+        <div class="child">
+          center
+          <!-- <img src="./color.jpg" alt="" class="child"> -->
+        </div>
+      </div>
+    </article>
+  </section>
+</body>
+</html>

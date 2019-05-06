@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>类型转换</title>
+</head>
+<body>
+数据类型
+  最新的ECMAScript标准定义了7种数据类型
+  原始类型
+    Boolean Null Undefined Number String Symbol
+  对象
+    Object
+
+显示类型转换（手动执行）
+  Number函数
+    原始类型转换
+      数值：转换后还是原来的值
+      字符串：如果可以被解析为数值，则转换为相应的数值；否则转为NaN；空字符串转为0
+      布尔值：true转为1，false转为0
+      undefined：转为NaN
+      null：转为0
+    对象类型转换
+      先调用对象自身的valueOf方法，如果该方法返回原始类型的值（数值、字符串和布尔值），则直接对该值使用Number方法，不再进行后续步骤。
+
+      如果valueOf返回复合类型的值，再调用对象自身的toString方法，如果toString方法返回原始类型的值，则对该值使用Number方法，不再进行后续步骤。
+
+      如果toString方法返回的是复合类型的值，则报错。
+  String函数
+    原始类型转换
+      数值：转为相应的字符串
+      字符串：转换后还是原来的值
+      布尔值：true转为"true"，false转为"false"
+      undefined：转为"undefined"
+      null：转为"null"
+    对象类型转换
+      先调用toString方法，如果toString方法返回的是原始类型的值，则对该值使用String方法，不再进行后续步骤。
+
+      如果toString方法返回复合类型的值，再调用valueOf方法，如果valueOf方法返回原始类型的值，则对该值使用String方法，不再进行后续步骤。
+
+      如果valueOf方法返回的是复合类型的值，则报错。
+  Boolean函数
+    原始类型转换
+      undefined
+      null
+      -0              =>          false
+      +0
+      NaN
+      ''（空字符串）
+    空对象、空数组为true!!!
+隐式类型转换（程序内部后台完成）
+  四则运算
+  判断语句
+  Native调用（console.log/alert）
+
+
+常见题目
+  [] + [] => ""
+    ([].valueOf() = [] < [].toString() = "" < "" + "" = "")
+
+  [] + {} => "[object Object]"  
+    ({}.valueOf() = {} < {}.toString() = "[object Object]" < "" + "[object Object]" = "[object Object]")
+
+  {} + [] => 0
+    (花括号被当做代码块，不执行)
+
+  {} + {} => "[object Object][object Object]"(Chrome)
+             NaN(Firefox)
+
+  true + true => 2
+
+  1 + {a: 1} => "1[object Object]"
+</body>
+</html>
+类型识别
+typeof || instanceof || Object.prototype.toString.call || constructor
+
+typeof 可以识别基本类型（null除外，识别为对象），不可以识别具体的对象类型（function除外）
+instanceof 不可以识别原始类型，可以识别所有的对象类型（内置对象类型&自定义对象类型&父子类型）
+Object.prototype.toString.call 可以识别标准类型以及内置对象类型，不能识别自定义对象类型
+constructor 可以识别标准类型（undefined和null除外），可以识别内置对象及自定义对象类型

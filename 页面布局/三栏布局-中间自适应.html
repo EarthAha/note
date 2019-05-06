@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    html *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    section {
+      margin-top: 20px;
+    }
+    .layout article div {
+      min-height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 浮动解决方案 -->
+  <!-- 优：兼容性比较好 -->
+  <!-- 缺：元素脱离文档流，清除浮动，处理好浮动周边元素的关系，需处理好浮动效果带来的影响 -->
+
+  <!-- 区域划分 -->
+  <section class="layout float">
+    <style>
+      .layout.float .left {
+        float: left;
+        width: 300px;
+        background: red;
+      }
+      .layout.float .right {
+        float: right;
+        width: 300px;
+        background: red;
+      }
+      .layout.float .center {
+        background: yellow;
+      }
+    </style>
+    <!-- 容器 -->
+    <article class="left-right-center">
+      <!-- 块 -->
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="center">
+        <h1>浮动解决方案</h1>
+        1. 这是三栏布局中间部分
+        2. 这是三栏布局中间部分
+      </div>
+    </article>
+  </section>
+
+  <!-- 绝对定位解决方案 -->
+  <!-- 优：快捷 -->
+  <!-- 缺：布局脱离文档流，其子元素也会脱离文档流，方案可使用性较差 -->
+  <section class="layout absolute">
+    <style>
+      .layout.absolute .left-center-right>div {
+        position: absolute;
+      }
+      .layout.absolute .left {
+        left: 0;
+        width: 300px;
+        background: red;
+      }
+      .layout.absolute .center {
+        left: 300px;
+        right: 300px;
+        background: yellow;
+      }
+      .layout.absolute .right {
+        right: 0;
+        width: 300px;
+        background: red;
+      }
+    </style>
+    <article class="left-center-right">
+      <div class="left"></div>
+      <div class="center">
+        <h1>绝对定位解决方案</h1>
+        1. 这是三栏布局中间部分
+        2. 这是三栏布局中间部分
+      </div>
+      <div class="right"></div>
+    </article>
+  </section>
+
+  <!-- flexbox解决方案 -->
+  <!-- 优：CSS3新出现的一种布局方式，就是为了解决上述两种方式的不足，比较完美的布局方案，尤其是现在的移动端，基本上都处于flex布局 -->
+  <section class="layout flexbox">
+    <style>
+      .layout.flexbox {
+        margin-top: 140px;
+      }
+      .layout.flexbox .left-center-right {
+        display: flex;
+      }
+      .layout.flexbox .left, .layout.flexbox .right {
+        width: 300px;
+        background: red;
+      }
+      .layout.flexbox .center {
+        flex: 1;
+        background: yellow;
+      }
+    </style>
+    <article class="left-center-right">
+      <div class="left"></div>
+      <div class="center">
+        <h1>flexbox解决方案</h1>
+        1. 这是三栏布局中间部分
+        2. 这是三栏布局中间部分
+      </div>
+      <div class="right"></div>
+    </article>
+  </section>
+
+  <!-- 表格布局方案 -->
+  <!-- 优：兼容性比较好 -->
+  <!-- 缺：比较麻烦，操作较为繁琐，对SEO也不友好 -->
+  <section class="layout table">
+    <style>
+      .layout.table .left-center-right {
+        width: 100%;
+        display: table;
+        height: 100px;
+      }
+      .layout.table .left-center-right>div {
+        display: table-cell;
+      }
+      .layout.table .left {
+        width: 300px;
+        background: red;
+      }
+      .layout.table .center {
+        background: yellow;
+      }
+      .layout.table .right {
+        width: 300px;
+        background: red;
+      }
+    </style>
+    <article class="left-center-right">
+      <div class="left"></div>
+      <div class="center">
+        <h1>表格布局解决方案</h1>
+        1. 这是三栏布局中间部分
+        2. 这是三栏布局中间部分
+      </div>
+      <div class="right"></div>
+    </article>
+  </section>
+
+  <!-- 网格布局解决方案 -->
+  <section class="layout grid">
+    <style>
+      .layout.grid .left-center-right {
+        display: grid;
+        width: 100%;
+        grid-template-rows: 100px;
+        grid-template-columns: 300px auto 300px;
+      }
+      .layout.grid .left, .layout.grid .right {
+        background: red;
+      }
+      .layout.grid .center {
+        background: yellow;
+      }
+    </style>
+    <article class="left-center-right">
+      <div class="left"></div>
+      <div class="center">
+        <h1>网格布局解决方案</h1>
+        1. 这是三栏布局中间部分
+        2. 这是三栏布局中间部分
+      </div>
+      <div class="right"></div>
+    </article>
+  </section>
+</body>
+</html>
+
+<!-- 1. 每个解决方案的优缺点 -->
+<!-- 2. 假设高度未知，哪个方案不再适用，为什么 -->
+<!-- 3. 兼容性，真正的业务中，哪种方案最实用 -->
+
+<!-- 页面布局小结 -->
+<!-- 语义化掌握到位 -->
+<!-- 页面布局理解深刻 -->
+<!-- CSS基础知识扎实 -->
+<!-- 思维灵活且积极上进 -->
+<!-- 代码书写规范 -->
+
+<!-- 页面布局的变通 -->
+<!-- 三栏布局 -->
+<!-- 1. 左右宽度固定，中间自适应 -->
+<!-- 2. 上下高度固定，中间自适应 -->
+<!-- 两栏布局 -->
+<!-- 1. 左/右宽度固定，右/左自适应 -->
+<!-- 2. 上/下高度固定，下/上自适应 -->

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>定位布局</title>
+  <style>
+    html * {
+      margin: 0;
+      padding: 0;
+      /* background: rgb(0,0,255); */
+    }
+    body section {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- sticky -->
+  <!-- 粘性定位可被认为是相对定位和固定定位的混合。元素在跨越特定阈值前为相对定位，之后为固定定位 -->
+  <!-- 须指定top, right, bottom 或 left 四个阈值其中之一，才可使粘性定位生效，否则其行为与相对定位相同 -->
+  <!-- 盒位置根据正常流计算，然后相对于该元素在流中的flow root (BFC) 和 containing block (最近的块级祖先元素) 定位。在所有情况下（即便被定位元素为table时），该元素定位均不对后续元素造成影响。当元素B被粘性定位时，后续元素的位置仍按照B未定位时的位置来确定。position: sticky 对 table 元素的效果与position: relative相同 -->
+
+  <!-- top, right, bottom, left 和 z-index 属性仅能在定位元素上生效，position取值非static情况下生效(position: relative/absolute/fixed/sticky(粘性定位)) -->
+  <section class="ref">
+    <style>
+      .ref {
+        position: relative;
+        left: 50px;
+        right: 50px;
+        /* width: 100%; */
+        height: 200px;
+        border: 1px dashed #aaa;
+        background: palegreen;
+      }
+      .ref .sample {
+        position: static;
+        z-index: -1;
+        background: pink;
+        top: 30px;
+        bottom: 30px;
+        left: 30px;
+        right: 30px;
+      }
+      .ref .z {
+        position: absolute;
+        background: blue;
+        /* z-index: -1; */
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+    <article>
+      <!-- <div class="z">z-index</div> -->
+      <div class="sample">sample</div>
+      <div class="z">z-index</div>
+    </article>
+  </section>
+
+  <!-- 相对定位 relative 通用使用场景：绝对定位元素的参照物-->
+  <!-- 1. 仍在文档流中 -->
+  <!-- 2. 参照物为元素本身 -->
+  <section class="relative">
+    <style>
+      .relative article {
+        border: 1px dashed #aaa;
+      }
+      .relative div:nth-of-type(1) {
+        border-bottom: 1px dashed #aaa;
+      }
+      .relative div:nth-of-type(3) {
+        border-top: 1px dashed #aaa;
+      }
+      .relative .sample {
+        position: relative;
+        background: pink;
+        top: -20px;
+        left: 20px;
+      }
+    </style>
+    <article>
+      <div>pre element</div>
+      <div class="sample">relative element</div>
+      <div>behind element</div>
+    </article>
+  </section>
+
+  <!-- 绝对定位元素（absolute/fixed）填充可用空间（保留width/height为auto）：
+  1. 同时指定top和bottom，垂直居中
+  2. 同时指定left和right，水平居中 -->
+
+  <!-- 绝对定位 absolute -->
+  <!-- 1. 默认宽度为内容宽度 -->
+  <!-- 2. 脱离文档流 -->
+  <!-- 3. 参照物为第一个定位祖先/根元素 -->
+  <section class="absolute">
+    <style>
+      .absolute article {
+        position: relative;
+        border: 1px dashed #aaa;
+      }
+      .absolute div:nth-of-type(1) {
+        border-bottom: 1px dashed #aaa;
+      }
+      .absolute div:nth-of-type(3) {
+        border-top: 1px dashed #aaa;
+      }
+      .absolute .sample{
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        background: pink;
+      }
+    </style>
+    <article>
+      <div>pre element</div>
+      <div class="sample">absolute element</div>
+      <div>behind element</div>
+    </article>
+  </section>
+
+  <!-- 固对定位 fixed -->
+  <!-- 1. 默认宽度为内容宽度 -->
+  <!-- 2. 脱离文档流 -->
+  <!-- 3. 参照物为视窗（浏览器窗口/屏幕视口/viewport） -->
+  <!-- （fixed属性会创建新的层叠上下文。当元素祖先的 transform 属性非none时，容器由视口改为该祖先） -->
+  <section class="fixed">
+    <style>
+      .fixed article {
+        position: relative;
+        border: 1px dashed #aaa;
+        /* height: 1000px; */
+      }
+      .fixed div:nth-of-type(1) {
+        border-bottom: 1px dashed #aaa;
+      }
+      .fixed div:nth-of-type(3) {
+        border-top: 1px dashed #aaa;
+      }
+      /* .fixed .sample{
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background: pink;
+      } */
+    </style>
+    <article>
+      <div>pre element</div>
+      <div class="sample">fixed element</div>
+      <div>behind element</div>
+    </article>
+  </section>
+
+  <!-- 遮罩 -->
+  <!-- <section class="mask">
+    <style>
+      .mask .sample {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 99;
+        background: mediumaquamarine;
+        opacity: 0.3;
+      }
+    </style>
+    <article>
+      <div class="sample"></div>
+    </article>
+  </section> -->
+
+  <!-- 三行自适应布局 -->
+  <section class="layout">
+    <style>
+      .layout article {
+        position: relative;
+        border: 2px dotted green;
+        width: 100%;
+        height: 500px;
+      }
+      .layout .header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: maroon;
+      }
+      .layout .body {
+        position: absolute;
+        top: 100px;
+        left: 0;
+        bottom: 100px;
+        right: 0;
+        background: #aaa;
+        overflow: auto;
+      }
+      .layout .content {
+        height: 500px;
+      }
+      .layout .footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: blue;
+      }
+    </style>
+    <article>
+      <div class="header">header</div>
+      <div class="body">body
+        <div class="content">content area</div>
+      </div>
+      <div class="footer">footer</div>
+    </article>
+  </section>
+</body>
+<script>
+  top:
+    for (let i = 0; i < 3; i++) {
+      // console.log(i);
+      for (let j = 0; j< 3; j++) {
+        // console.log(j);
+        if (i === 1 && j === 1) continue;
+        console.log('i=' + i + ', j=' + j);
+      }
+    }
+</script>
+</html>

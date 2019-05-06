@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+MVVM框架类
+  1.了解MVVM框架吗？
+    Vue.js  React.js  Angular.js
+    <!-- 一定要想好说哪个 -->
+    <!-- 收住优点，攒着下面说，开启引导模式 -->
+    <!-- 话别说的太满，低调谨慎 -->
+  2.谈谈你怼MVVM的认识？
+    1.先聊MVC（Model View Controller）
+    2.聊聊MVVM的定义（在MVC/MVP的基础上衍生而来的）
+    Model View ViewModel
+    <!-- 聊聊MVC，彰显知识面涉猎较多 -->
+    <!-- 把MVVM的定义说清楚，表达概念理解到位 -->
+    <!-- 对比MVVM和MVC -->
+  3.双向绑定是什么原理，可以写出来吗？
+    view -> 
+         <-  data
+    data -> view 正向    
+      核心API：Object.defineProperty (ES5, 所有的MVVM框架最新版本都利用其来实现，Angular之前通过脏检查实现)（该API可监听到data的变化，监听到变化后会有一个回调函数，定义时写好定义函数即可，自动完成data的变化到view的映射）
+    view -> data 反向
+      利用input事件，框架背后实现
+    
+    双向绑定的原理（MDN）
+      Object.defineProperty()方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回这个对象。
+      Object.defineProperty(obj, prop, descriptor)
+      obj: 需要定义属性的对象
+      prop: 要定义/修改属性的名称
+      descriptor: 被定义/修改的属性的描述符
+      <!-- Object.defineProperty的用法要熟记于心 -->
+      <!-- Object.defineProperty与Reflect.defineProperty的区别 -->
+      <!-- Object.defineProperty要会手写 -->
+  4.使用了什么设计模式？
+  5.生命周期是什么？
+  6.有看过源码吗？
+<script>
+
+</script>
+</body>
+</html>

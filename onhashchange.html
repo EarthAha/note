@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .box1 {
+      background: blue;
+      /* margin-bottom: 50px; */
+    }
+    .dot {
+      background: burlywood;
+      margin-bottom: 10px;
+    }
+    .box2 {
+      background: blueviolet;
+    }
+  </style>
+</head>
+<body>
+  <div class="parent">
+    <div class="box">
+      <a href="#home">首页</a>
+      <a href="#help">帮助</a>
+    </div>
+    <div id="main"></div>
+  </div>
+
+  <script>
+    window.onhashchange = function() {
+      // console.log(location);
+      // console.log(location.hash);
+      let hash = location.hash;
+      if (hash === '#home') {
+        document.getElementById('main').innerHTML = '这是首页';
+        // return;
+      }else if (hash === '#help') {
+        document.getElementById('main').innerHTML = '这是帮助页面';
+        // return;
+      };
+      // document.getElementById('main').innerHTML = '404';
+    }
+  </script>
+</body>
+</html>
