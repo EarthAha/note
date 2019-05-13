@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+JS运行机制
+  如何理解JS的单线程
+    JS: 单线程（JS在同一时间只能做一件事）
+  
+  什么是任务队列
+    任务队列：同步任务 异步任务
+  
+  什么是Event Loop(事件循环)
+    运行栈空了再去任务队列拿任务进行执行，如此循环为Event Loop
+
+  异步任务
+  setTimeout和setInterval
+  DOM事件
+    addEventListener(监听GUI线程，当事件被触发的时候，事件函数体放入异步队列中)
+  ES6中的Promise
+<script>
+// 最后的打印顺序？
+  // // console.log为同步任务
+  // console.log(1);
+  // // setTimeout为异步任务，先挂起
+  // setTimeout(function(){
+  //   console.log(2);
+  // }, 0);
+  // // 同步任务执行完毕后，才会处理异步任务
+  // console.log(3);
+  // console.log(4);
+  // 1 3 2
+// 单线程任务队列具有优先顺序，JS运行机制的执行过程中优先执行同步任务，同步任务处理完之后，才会响应异步任务
+
+// 输出内容？
+  // console.log('A');
+  // // while (true) {
+
+  // // };
+  // console.log('B');
+  // // A
+// 因为是同步任务，while会不断的循环，所以之后的打印B不会被执行
+
+  // console.log('A');
+  // setTimeout(function(){
+  //   console.log('B');
+  // }, 0);
+  // while (1) {
+
+  // }
+  // A
+// setTimeout为异步队列，所以在同步任务执行完之前是不会被响应的
+
+// console.log会打印几次，打印内容？
+  for (var i = 0; i < 4; i++) {
+    setTimeout(function(){
+      console.log(i);
+    }, 1000);
+  }
+  // 4 4 4 4
+// 浏览器会有一个timer模块，主要用来处理setTimeout和setInterval的，定时器到了时间才会把语句放入异步的过程中，再等待事件循环来执行（异步任务的放入的时间和执行时间）
+
+  for (let i = 0; i < 4; i++) {
+    setTimeout(function(){
+      console.log(i);
+    }, 1000);
+  }
+  // 0 1 2 3
+</script>
+</body>
+</html>
